@@ -1,0 +1,153 @@
+<html>
+
+<head>
+  <link rel="stylesheet" type="text/css" href="/portal/resources/style-guide/css/fluig-style-guide.min.css">
+  <link rel="stylesheet" type="text/css" href="/portal/resources/style-guide/css/fluig-style-guide-filter.min.css">
+  <script type="text/javascript" src="http://fluig.totvs.com/portal/resources/js/jquery/jquery.js"></script>
+  <script type="text/javascript" src="http://fluig.totvs.com/portal/resources/js/jquery/jquery-ui.min.js"></script>
+  <script src="/portal/resources/js/jquery/jquery.js"></script>
+  <script src="/portal/resources/js/jquery/jquery-ui.min.js"></script>
+  <script src="/portal/resources/js/mustache/mustache-min.js"></script>
+  <script src="/portal/resources/style-guide/js/fluig-style-guide.min.js"></script>
+  <script src="/portal/resources/style-guide/js/fluig-style-guide-filter.min.js"></script>
+  <title>Manter Cupons/Notas Fiscais</title>
+  <script>
+  function fnVisualizar() {
+    console.log(document.getElementById("empresaFluig").value + "-" + document.getElementById('idFluig').value + "-" + document.getElementById('versaoFluig').value);
+    var empresaFluig = document.getElementById('empresaFluig').value;
+    var idFluig = document.getElementById('idFluig').value;
+    var versaoFluig = document.getElementById('versaoFluig').value;
+    if (idFluig==null){
+      var empresaFluig = document.getElementById('empresaFluig').innerHTML;
+      var idFluig = document.getElementById('idFluig').innerHTML;
+      var versaoFluig = document.getElementById('versaoFluig').innerHTML;
+    }
+    if (idFluig != null) {
+      var nomeURL = window.location.protocol + "//" + window.location.host + "/webdesk/streamcontrol/?WDCompanyId=" + empresaFluig + "&WDNrDocto=" + idFluig + "&WDNrVersao=" + versaoFluig;
+      window.open(nomeURL, "status , scrollbars=no ,width=600, height=350 , top=0 , left=0");
+    } else {
+      alert("ATENCAO!!!\n\n O formulario nao possui a identificao do documento.\n\n")
+    }
+  } //fnVisualizar
+  </script>
+</head>
+
+<body>
+  <div class="fluig-style-guide background">
+    <form role="form" method="post">
+      <div class="row col-sm-12">
+        <h2>Dados do Cupom/Nota Fiscal<hr></h2>
+      </div>
+      <div class="form-group">
+        <div class="row">
+          <label class="col-sm-2 control-label" align="right">Filial</label>
+          <div class="col-sm-2">
+            <input type="text" class="form-control" name="codigoFilial" id="codigoFilial" />
+          </div>
+          <label class="col-sm-2 control-label" align="right">Número Cupom/Nota Fiscal</label>
+          <div class="col-sm-2">
+            <input type="text" class="form-control" name="numeroCupomFiscal" id="numeroCupomFiscal" />
+          </div>
+        </div>
+      </div>
+      <div class="form-group">
+        <div class="row">
+          <label class="col-sm-2 control-label" align="right">Data de Emissão</label>
+          <div class="col-sm-2">
+            <input type="text" class="form-control" name="dataEfetivaVenda" id="dataEfetivaVenda" />
+          </div>
+          <label class="col-sm-2 control-label" align="right">Valor Convênio</label>
+          <div class="col-sm-2">
+            <input type="text" class="form-control" name="valorConvenio" id="valorConvenio" />
+          </div>
+          <div class="col-sm-1">
+            <button type="button" name="btDocumento" class="btn btn-success" onclick="fnVisualizar();">Ver Receita</button>
+            <input type="hidden" class="form-control" name="empresaFluig" id="empresaFluig" />
+            <input type="hidden" class="form-control" name="idFluig" id="idFluig" />
+            <input type="hidden" class="form-control" name="versaoFluig" id="versaoFluig" />
+            <input type="hidden" class="form-control" name="descricaoFluig" id="descricaoFluig" />
+            <input type="hidden" class="form-control" name="pastaFluig" id="pastaFluig" />
+          </div>
+        </div>
+      </div>
+      <div class="form-group">
+        <div class="row">
+          <label class="col-sm-2 control-label" align="right">Associado</label>
+          <div class="col-sm-2">
+            <input type="text" class="form-control" name="matriculaAssociado" id="matriculaAssociado" />
+          </div>
+          <div class="col-sm-4">
+            <input type="text" class="form-control" name="nomeAssociado" id="nomeAssociado" />
+          </div>
+        </div>
+      </div>
+      <div class="row col-sm-12">
+        <h4>Itens do Cupom/Nota Fiscal<hr></h4>
+      </div>
+      <div class="col-md-12">
+	      <div class="form-field table-responsive" data-type="tabledetail" data-show-properties="" data-field-name="tabledetail">
+				  <table class="table" cellspacing="0" tablename="itensNotaFiscal">
+  					<thead>
+  						<tr class="tableHeadRow">
+  							<th class="tableColumn">Item</th>
+  							<th class="tableColumn">EAN</th>
+                <th class="tableColumn">Descrição</th>
+                <th class="tableColumn">Categoria</th>
+                <th class="tableColumn">Quantidade</th>
+                <th class="tableColumn">Vlr. Unitário</th>
+                <th class="tableColumn">Vlr. Total</th>
+                <th class="tableColumn">Registro CRM</th>
+  						</tr>
+            </thead>
+            <tbody>
+  						<tr>
+  							<td class="col-sm-1">
+  								<div class="form-group">
+  									<input type="text" class="form-control" name="codigo" id="codigo" />
+  								</div>
+  							</td>
+                <td class="col-sm-1">
+  								<div class="form-group">
+  									<input type="text" class="form-control" name="ean" id="ean" />
+  								</div>
+  							</td>
+                <td class="col-sm-3">
+  								<div class="form-group">
+  									<input type="text" class="form-control" name="descricao" id="descricao" />
+  								</div>
+  							</td>
+                <td class="col-sm-2">
+  								<div class="form-group">
+  									<input type="text" class="form-control" name="categoria" id="categoria" />
+  								</div>
+  							</td>
+                <td class="col-sm-1">
+  								<div class="form-group">
+  									<input type="text" class="form-control" name="quantidade" id="quantidade" />
+  								</div>
+  							</td>
+                <td class="col-sm-1">
+  								<div class="form-group">
+  									<input type="text" class="form-control" name="valorUnitario" id="valorUnitario" />
+  								</div>
+  							</td>
+                <td class="col-sm-1">
+  								<div class="form-group">
+  									<input type="text" class="form-control" name="valorTotal" id="valorTotal" />
+  								</div>
+  							</td>
+                <td class="col-sm-1">
+  								<div class="form-group">
+  									<input type="text" class="form-control" name="registroCRM" id="registroCRM" />
+  								</div>
+  							</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </form>
+  </div>
+</body>
+
+</html>
