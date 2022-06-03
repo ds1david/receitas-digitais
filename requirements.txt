@@ -1,6 +1,6 @@
 argh==0.26.2
 beautifulsoup4==4.6.0
-bottle==0.12.13
+bottle==0.12.20
 bs4==0.0.1
 certifi==2018.1.18
 chardet==3.0.4
